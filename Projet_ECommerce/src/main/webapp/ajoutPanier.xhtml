@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="title">Ajouter au panier</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				
+				<h:form enctype="multipart/form-data" class="form-horizontal">
+					<h:panelGrid columns="2">
+		Id produit :
+		<p:selectOneMenu id="categorieSelector" value="#{paMB.nom}"
+							lazy="true" style="width:125px">
+							<f:selectItems value="#{paMB.listNomProd}" />
+						</p:selectOneMenu>
+		Quantité: <p:inputText value="#{paMB.q}"></p:inputText>
+
+						<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>

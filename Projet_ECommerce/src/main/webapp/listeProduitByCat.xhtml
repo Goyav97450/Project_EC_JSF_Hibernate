@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/adminLayout.xhtml">
+
+	<ui:define name="title">Accueil Admin</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+
+				<h:form styleClass="form-horizontal">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="categorieSelector" value="Categorie:" />
+						<p:selectOneMenu id="categorieSelector"
+							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+							<f:selectItems value="#{cAMB.listeIdCat}" />
+						</p:selectOneMenu>
+						<h:commandButton value="Afficher produits"
+							action="#{cAMB.rechercherProduitsByCat}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+
+				<h1 class="titreliste">
+					<h:outputText rendered="#{cAMB.indice}" value="Liste des Produits" />
+				</h1>
+				<h:form rendered="#{cAMB.indice}" styleClass="form-horizontal">
+					<p:dataTable var="pr" value="#{prMB.listeProd}"
+						widgetVar="prodTable" id="tableProdAdmin"
+						emptyMessage="Aucun produit trouvée pour ce critère."
+						filteredValue="#{prMB.listeFiltreProd}">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Rechercher:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('prodTable').filter()" style="width:150px"
+									placeholder="Entrer mot-clé" />
+							</p:outputPanel>
+						</f:facet>
+						<p:column filterBy="#{pr.idProduit}" headerText="ID"
+							footerText="exact" filterMatchMode="exact">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('prodTable').filter()">
+									<f:selectItem itemLabel="Select One" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{prMB.listeIdProd}" />
+								</p:selectOneMenu>
+							</f:facet>
+							<h:outputText value="#{pr.idProduit}" />
+						</p:column>
+
+						<p:column filterBy="#{pr.designation}" headerText="Designation"
+							footerText="contains" filterMatchMode="contains">
+							<h:outputText value="#{pr.designation}" />
+						</p:column>
+						<p:column filterBy="#{pr.description}" headerText="Description"
+							footerText="contains" filterMatchMode="contains">
+							<h:outputText value="#{pr.description}" />
+						</p:column>
+						<p:column filterBy="#{pr.prix}" headerText="Prix"
+							footerText="contains" filterMatchMode="contains">
+							<h:outputText value="#{pr.prix}" />
+						</p:column>
+						<p:column filterBy="#{pr.quantite}" headerText="Quantité"
+							footerText="contains" filterMatchMode="contains">
+							<h:outputText value="#{pr.quantite}" />
+						</p:column>
+						<p:column headerText="Photo">
+							<h:graphicImage value="#{pr.image}" width="100px" height="100px" />
+						</p:column>
+
+						<p:column headerText="Categorie">
+							<h:outputText value="#{pr.ca.idCategorie}" />
+						</p:column>
+						<p:column headerText="Gestion">
+							<p:commandLink value="Supprimer" action="#{prMB.deleteProduit}"
+								update="tableProdAdmin">
+								<f:setPropertyActionListener value="#{pr.idProduit}"
+									target="#{prMB.pr.idProduit}" />
+							</p:commandLink>
+							<br />
+							<p:commandLink value="Modifier" action="updateProduit">
+								<f:setPropertyActionListener value="#{pr}" target="#{prMB.pr}" />
+							</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

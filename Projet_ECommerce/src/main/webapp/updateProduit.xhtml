@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/adminLayout.xhtml">
+
+	<ui:define name="title">Modifier Produit</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+
+				<h:form enctype="multipart/form-data" class="form-horizontal">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="produitSelector" value="Produit ID:" />
+						<p:selectOneMenu id="produitSelector" value="#{prMB.pr.idProduit}"
+							lazy="true" style="width:125px">
+							<f:selectItems value="#{prMB.listeIdProd}" />
+						</p:selectOneMenu>
+		Designation: <p:inputText value="#{prMB.pr.designation}"></p:inputText>
+		Description: <p:inputText value="#{prMB.pr.description}"></p:inputText>
+		Quantite: <p:inputText value="#{prMB.pr.quantite}" label="Quantité"
+							validatorMessage="La quantité doit être comprise entre 1 et 2000">
+							<f:validateLongRange minimum="1" maximum="2000"></f:validateLongRange>
+						</p:inputText>
+		Prix: <p:inputText value="#{prMB.pr.prix}" label="Prix"
+							validatorMessage="Le prix doit être positif.">
+							<f:validateDoubleRange minimum="0.1" maximum="10000"></f:validateDoubleRange>
+						</p:inputText>
+		Image:<p:fileUpload value="#{prMB.file}" mode="simple"
+							skinSimple="true" />
+
+						<h:commandButton value="Modifier" action="#{prMB.updateProduit}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

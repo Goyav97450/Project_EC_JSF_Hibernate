@@ -9,7 +9,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Specifier le chemin du fichier de config qu context spring IoC -->
+	<!-- Specifier le chemin du fichier de config du context spring IoC -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/application-context.xml</param-value>
@@ -28,7 +28,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<!-- Le mapping de la servlet unique de JSJ -->
+	<!-- Le mapping de la servlet unique de JSF -->
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="title">Afficher les produits</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form class="form-horizontal">
+					<p:outputLabel for="type" value="Rechercher par:" />
+					<p:selectOneRadio id="type" value="#{clMB.type}" required="true"
+						style="text-align: center; margin-left: 40%">
+						<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
+						<f:selectItem itemLabel="Catégorie" itemValue="cat" />
+					</p:selectOneRadio>
+					<h:inputText value="#{clMB.rech}" />
+					<h:commandButton value="Rechercher" action="#{clMB.affProd}" />
+				</h:form>
+
+				<h:form id="form" rendered="#{clMB.ind}" class="form-horizontal">
+					<p:dataTable var="prod" value="#{clMB.listeProd}" id="tableProd">
+						<p:column headerText="ID">
+							<h:outputText value="#{prod.idProduit}" />
+						</p:column>
+						<p:column headerText="Designation:">
+							<h:outputText value="#{prod.designation}" />
+						</p:column>
+						<p:column headerText="Description:">
+							<h:outputText value="#{prod.description}" />
+						</p:column>
+						<p:column headerText="Prix:">
+							<h:outputText value="#{prod.prix}" />
+						</p:column>
+						<p:column headerText="Quantité:">
+							<h:outputText value="#{prod.quantite}" />
+						</p:column>
+						<p:column headerText="Catégorie:">
+							<h:outputText value="#{prod.ca.nomCategorie}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

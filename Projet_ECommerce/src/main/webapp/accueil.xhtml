@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="title">Accueil</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+				<h:form styleClass="form-horizontal">
+					<p:carousel value="#{cAMB.listeCat}" headerText="Catégories"
+						var="cat" itemStyle="text-align:center" responsive="true">
+						<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+							columnClasses="label,value" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<f:facet name="header">
+								<h:graphicImage value="#{cat.image}" width="100px"
+									height="100px" />
+							</f:facet>
+
+							<h:outputText value="Id:" />
+							<h:outputText value="#{cat.idCategorie}" />
+
+							<h:outputText value="Nom:" />
+							<h:outputText value="#{cat.nomCategorie}" />
+
+							<h:outputText value="Description" />
+							<h:outputText value="#{cat.description}" />
+						</p:panelGrid>
+
+					</p:carousel>
+
+				</h:form>
+
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

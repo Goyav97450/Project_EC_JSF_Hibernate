@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="title">Votre Panier</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form enctype="multipart/form-data" class="form-horizontal"> 
+					<h:panelGrid columns="2">
+		idProduit: <p:inputText value="#{paMB.prod.idProduit}" />
+
+						<h:commandButton value="Supprimer"
+							action="#{paMB.supprProdPanier}"></h:commandButton>
+						<h:commandButton value="Finaliser la commande"
+							action="enregistrement.xhtml"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+				<h:form class="form-horizontal">
+					<p:dataTable var="lc" value="#{sessionScope.panierCl.listeCom}">
+						<p:column headerText="idProduit">
+							<h:outputText value="#{lc.pr.idProduit}" />
+						</p:column>
+						<p:column headerText="Produit">
+							<h:outputText value="#{lc.pr.designation}" />
+						</p:column>
+
+						<p:column headerText="Quantité">
+							<h:outputText value="#{lc.quantite}" />
+						</p:column>
+
+						<p:column headerText="Prix">
+							<h:outputText value="#{lc.prix}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

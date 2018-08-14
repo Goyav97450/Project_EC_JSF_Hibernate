@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">Layout</ui:insert></title>
+	<h:outputStylesheet name="style.css" library="style" target="head"/>
+</h:head>
+
+
+<h:body>
+<div>
+<ui:insert name="entete">
+<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+</ui:insert>
+</div>
+
+<div>
+<ui:insert name="contenu">
+<ui:include src="/templates/corps.xhtml"></ui:include>
+</ui:insert>
+</div>
+
+<div>
+<ui:insert name="message">
+</ui:insert>
+</div>
+
+</h:body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Header</title>
+</h:head>
+<h:body>
+
+	<!-- Définir le contenu du template -->
+	<ui:composition>
+		<div class="container-fluid commerceheader">
+			<h1>Marchambulants</h1>
+
+			<h:form styleClass="commercemenu">
+				<p:menubar>
+					<p:menuitem value="Accueil" url="accueil.xhtml" />
+
+					<p:menuitem value="Afficher" url="affProd.xhtml" />
+					<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
+					<p:submenu label="Panier">
+						<p:menuitem value="Ajouter des produits à votre panier"
+							url="ajoutPanier.xhtml" />
+						<p:menuitem value="Votre panier" url="panier.xhtml" />
+					</p:submenu>
+					<p:menuitem value="Login" url="login.xhtml"/>
+					<f:facet name="options">
+						<h:commandLink value="Logout" action="#{logout.executeLogout}">
+						</h:commandLink>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</div>
+	</ui:composition>
+
+</h:body>
+</html>

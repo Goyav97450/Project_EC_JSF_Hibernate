@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/adminLayout.xhtml">
+
+	<ui:define name="title">Modifier Catégorie</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+				<h:form enctype="multipart/form-data" class="form-horizontal">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="categorieSelector" value="Categorie:" />
+						<p:selectOneMenu id="categorieSelector"
+							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+							<f:selectItems value="#{cAMB.listeIdCat}" />
+						</p:selectOneMenu>
+		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}"></p:inputText>
+		Description: <p:inputText value="#{cAMB.cat.description}"></p:inputText>
+		Image: <p:fileUpload value="#{cAMB.file}" mode="simple"
+							skinSimple="true" />
+
+						<h:commandButton value="Modifier" action="#{cAMB.updateCategorie}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
