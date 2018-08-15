@@ -18,6 +18,12 @@ import fr.adaming.service.IAdminService;
 @SessionScoped
 public class AdminManagedBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	// Attributs
 	/**
 	 * Attribut Admin qui servira à l'admin pour se connecter

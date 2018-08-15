@@ -3,9 +3,7 @@ package fr.adaming.service;
 import fr.adaming.model.Admin;
 
 /**
- * @author Ewen L'annotation @Local permet au conteneur EJB de comprendre que
- *         les classes implémentant cette interface seront des EJB session avec
- *         une portée <i>locale</i>
+ * @author Ewen
  */
 public interface IAdminService {
 	/**
