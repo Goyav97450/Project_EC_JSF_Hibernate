@@ -10,6 +10,16 @@
 		<hibernate.version>4.2.21.Final</hibernate.version>
 		<spring.version>4.1.9.RELEASE</spring.version>
 	</properties>
+	
+	<!-- Primefaces theme repository -->
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 	<dependencies>
 
@@ -34,6 +44,13 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>sunny</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
 
 		<!-- ****************** Libs de Hibernate -->
 		<!-- hibernate-core -->
@@ -147,7 +164,6 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.0.6</version>
 		</dependency>
-
 	</dependencies>
 
 	<!-- forcer maven à compiler avec le compilateur de JAVA 8 -->

@@ -99,7 +99,7 @@ public class AdminManagedBean implements Serializable {
 		// Appel de la méthode service
 		Admin aExist = aService.isExistService(a);
 
-		if (a != null) {
+		if (aExist != null) {
 			// si l'admin existe bien, il peut se connecter
 			this.loggedIn = true;
 			// inscription de l'admin dans la session, ainsi que son statut

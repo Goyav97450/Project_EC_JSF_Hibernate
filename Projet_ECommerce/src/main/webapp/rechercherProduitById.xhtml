@@ -29,9 +29,8 @@
 				<h1 class="titreliste2">
 					<h:outputText rendered="#{prMB.indice}" value="Produit Trouvé"></h:outputText>
 				</h1>
-				<h:form id="form" rendered="#{prMB.indice}" class="form-horizontal">
+				<h:form id="form" rendered="#{prMB.indice}" styleClass="form-horizontal">
 					<p:dataTable var="pr" value="#{prMB.listeProd}" id="tableProdAdmin">
-
 						<p:column headerText="Id">
 							<h:outputText value="#{pr.idProduit}" />
 						</p:column>

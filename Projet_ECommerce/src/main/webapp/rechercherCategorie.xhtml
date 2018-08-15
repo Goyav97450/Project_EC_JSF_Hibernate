@@ -50,7 +50,9 @@
 					<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
 				</h1>
 				<h:form rendered="#{cAMB.indice}" styleClass="form-horizontal">
-					<p:dataTable var="cat" value="#{cAMB.cat}" id="tableCatAdmin">
+
+
+					<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
 						<p:column headerText="Id">
 							<h:outputText value="#{cat.idCategorie}" />
 						</p:column>
@@ -78,13 +80,14 @@
 								<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
 							</p:commandLink>
 							<br />
-							<h:commandLink value="Afficher les produits"
+							<p:commandLink value="Afficher les produits"
 								action="#{cAMB.rechercherProduitsByCat}">
 								<f:setPropertyActionListener value="#{cat.idCategorie}"
 									target="#{cAMB.cat.idCategorie}" />
-							</h:commandLink>
+							</p:commandLink>
 						</p:column>
 					</p:dataTable>
+
 				</h:form>
 
 				<h1 class="message">

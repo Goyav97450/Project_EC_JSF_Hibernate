@@ -53,8 +53,12 @@ public class ProduitDaoImpl implements IProduitDao {
 
 		// récup du query
 		Query query = s.createQuery(req);
-
-		return query.list();
+		List<Produit> listProduit = query.list();
+		
+		for (Produit pr : listProduit) {
+			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+		}
+		return listProduit;
 	}
 
 	@Override
@@ -84,10 +88,10 @@ public class ProduitDaoImpl implements IProduitDao {
 
 			// Récupération du produit dans la base de données et stockage
 			// dans un objet
-			Produit prFound = (Produit) s.get(Produit.class, pr.getIdProduit());
+			Produit pro = (Produit) s.get(Produit.class, pr.getIdProduit());
 			// Assignation de l'image au produit
-			prFound.setImage("data:image/png);base64," + Base64.encodeBase64String(prFound.getPhoto()));
-			return prFound;
+			pro.setImage("data:image/png);base64," + Base64.encodeBase64String(pro.getPhoto()));
+			return pro;
 		} catch (NullPointerException ex) {
 
 			ex.printStackTrace();
@@ -156,7 +160,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		Session s = sf.getCurrentSession();
 
 		// Création d'une requête HQL
-		String req = "FROM Produit p WHERE p.designation LIKE ?1 OR p.description LIKE ?2";
+		String req = "FROM Produit p WHERE p.designation LIKE :pNom OR p.description LIKE :pDes";
 
 		// Récupération d'une query
 		Query query = s.createQuery(req);
@@ -164,8 +168,8 @@ public class ProduitDaoImpl implements IProduitDao {
 		// Paramétrage de la query
 		// Passage de l'entrée en expression like
 		String rech = '%' + keyWord + '%';
-		query.setParameter(1, rech);
-		query.setParameter(2, rech);
+		query.setParameter("pNom", rech);
+		query.setParameter("pDes", rech);
 
 		// Récupération de la liste
 		@SuppressWarnings("unchecked")
