@@ -21,8 +21,8 @@
 							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
 							<f:selectItems value="#{cAMB.listeIdCat}" />
 						</p:selectOneMenu>
-						<h:commandButton value="Supprimer"
-							action="#{cAMB.deleteCategorie}"></h:commandButton>
+						<p:commandButton value="Supprimer"
+							action="#{cAMB.deleteCategorie}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 

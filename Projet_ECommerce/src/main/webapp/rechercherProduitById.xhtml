@@ -20,8 +20,8 @@
 							lazy="true" style="width:125px">
 							<f:selectItems value="#{prMB.listeIdProd}" />
 						</p:selectOneMenu>
-						<h:commandButton value="Rechercher"
-							action="#{prMB.rechercherProduitById}"/>
+						<p:commandButton value="Rechercher"
+							action="#{prMB.rechercherProduitById}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 

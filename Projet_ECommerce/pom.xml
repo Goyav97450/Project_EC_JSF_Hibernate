@@ -164,6 +164,15 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.0.6</version>
 		</dependency>
+		
+		<!-- Lib javax.servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- forcer maven à compiler avec le compilateur de JAVA 8 -->

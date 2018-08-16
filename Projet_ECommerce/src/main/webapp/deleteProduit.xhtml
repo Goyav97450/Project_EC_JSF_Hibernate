@@ -20,7 +20,7 @@
 				value="#{prMB.pr.idProduit}" lazy="true" style="width:125px">
 				<f:selectItems value="#{prMB.listeIdProd}" />
 			</p:selectOneMenu>
-			<h:commandButton value="Supprimer" action="#{prMB.deleteProduit}"></h:commandButton>
+			<p:commandButton value="Supprimer" action="#{prMB.deleteProduit}" ajax="false"/>
 		</h:panelGrid>
 	</h:form>
 

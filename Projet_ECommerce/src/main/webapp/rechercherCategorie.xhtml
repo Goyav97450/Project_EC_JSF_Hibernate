@@ -32,16 +32,16 @@
 							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
 							<f:selectItems value="#{cAMB.listeIdCat}" />
 						</p:selectOneMenu>
-						<h:commandButton value="Rechercher"
-							action="#{cAMB.rechercherCategorie}"></h:commandButton>
+						<p:commandButton value="Rechercher"
+							action="#{cAMB.rechercherCategorie}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 
 				<h:form rendered="#{cAMB.catSelector}" styleClass="form-horizontal">
 					<h:panelGrid columns="2">
 		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" />
-						<h:commandButton value="Rechercher"
-							action="#{cAMB.rechercherCategorieParNom}"></h:commandButton>
+						<p:commandButton value="Rechercher"
+							action="#{cAMB.rechercherCategorieParNom}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 
