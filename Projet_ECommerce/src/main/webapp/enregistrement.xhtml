@@ -20,13 +20,10 @@
 							<f:validator validatorId="valMail"></f:validator>
 						</p:inputText>
 		Telephone :<p:inputText value="#{paMB.cl.tel}" />
-						<h:commandButton value="Enregistrer"
-							action="#{paMB.enregistrerCommande}" />
+						<p:commandButton value="Enregistrer"
+							action="#{paMB.enregistrerCommande}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
-				<h1 style="color: red; text-align: center;">
-					<h:messages />
-				</h1>
 				<h1 class="message">
 					<h:messages />
 				</h1>

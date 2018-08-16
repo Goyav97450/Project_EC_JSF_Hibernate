@@ -20,12 +20,12 @@
 							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
 							<f:selectItems value="#{cAMB.listeIdCat}" />
 						</p:selectOneMenu>
-		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}"></p:inputText>
-		Description: <p:inputText value="#{cAMB.cat.description}"></p:inputText>
+		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}" required="true" label="Nom"></p:inputText>
+		Description: <p:inputText value="#{cAMB.cat.description}" required="true" label="Description"></p:inputText>
 		Image: <p:fileUpload value="#{cAMB.file}" mode="simple"
 							skinSimple="true" />
 
-						<h:commandButton value="Modifier" action="#{cAMB.updateCategorie}"></h:commandButton>
+						<p:commandButton value="Modifier" action="#{cAMB.updateCategorie}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 

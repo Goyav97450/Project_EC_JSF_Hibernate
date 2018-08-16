@@ -15,14 +15,14 @@
 				<h:form styleClass="form-horizontal">
 					<h:panelGrid columns="2">
 		Login: <p:inputText placeholder="Entrez votre mot de passe"
-							value="#{aMB.a.idAdmin}" required="true" />
+							value="#{aMB.a.idAdmin}" required="true" label="Login"/>
 		Password: <p:password placeholder="Entrez votre mot de passe"
-							value="#{aMB.a.mdp}" required="true" />
+							value="#{aMB.a.mdp}" required="true" label="Password"/>
 						<p:commandButton value="Connexion" action="#{aMB.connexion}" update="@all"/>
 					</h:panelGrid>
 				</h:form>
 
-				<h1>
+				<h1 class="message">
 					<h:messages />
 				</h1>
 

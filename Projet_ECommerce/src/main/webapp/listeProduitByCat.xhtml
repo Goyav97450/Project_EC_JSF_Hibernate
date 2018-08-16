@@ -21,8 +21,8 @@
 							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
 							<f:selectItems value="#{cAMB.listeIdCat}" />
 						</p:selectOneMenu>
-						<h:commandButton value="Afficher produits"
-							action="#{cAMB.rechercherProduitsByCat}"></h:commandButton>
+						<p:commandButton value="Afficher produits"
+							action="#{cAMB.rechercherProduitsByCat}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 

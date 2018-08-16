@@ -20,7 +20,7 @@
 						<f:selectItem itemLabel="Catégorie" itemValue="cat" />
 					</p:selectOneRadio>
 					<h:inputText value="#{clMB.rech}" />
-					<h:commandButton value="Rechercher" action="#{clMB.affProd}" />
+					<p:commandButton value="Rechercher" action="#{clMB.affProd}" ajax="false"/>
 				</h:form>
 
 				<h:form id="form" rendered="#{clMB.ind}" class="form-horizontal">

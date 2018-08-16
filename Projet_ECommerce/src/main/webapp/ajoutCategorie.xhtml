@@ -15,9 +15,9 @@
 
 				<h:form enctype="multipart/form-data" styleClass="form-horizontal">
 					<h:panelGrid columns="2">
-		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}" required="true"></p:inputText>
+		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}" required="true" label="Nom"/>
 		Description: <p:inputText value="#{cAMB.cat.description}"
-							required="true"></p:inputText>
+							required="true" label="Description"/>
 		Image: <p:fileUpload value="#{cAMB.file}" mode="simple"
 							skinSimple="true" />
 

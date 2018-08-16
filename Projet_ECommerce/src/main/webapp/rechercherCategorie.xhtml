@@ -39,7 +39,7 @@
 
 				<h:form rendered="#{cAMB.catSelector}" styleClass="form-horizontal">
 					<h:panelGrid columns="2">
-		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" />
+		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" label="Nom Catégorie"/>
 						<p:commandButton value="Rechercher"
 							action="#{cAMB.rechercherCategorieParNom}" ajax="false"/>
 					</h:panelGrid>

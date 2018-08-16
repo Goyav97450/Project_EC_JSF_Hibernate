@@ -6,9 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import fr.adaming.model.Admin;
-
+import javax.servlet.http.HttpSession;
 /**
  * @author Ewen ManagedBean correspondant au Logout
  */
@@ -20,10 +18,9 @@ public class LogoutManagedBean implements Serializable {
 
 	// Attributs
 	/**
-	 * Attribut Session contenant les informations de la session, en particulier
-	 * l'Admin
+	 * Attribut Session contenant les informations de la session, en particulier l'Admin
 	 */
-	private Admin a;
+	private HttpSession maSession;
 
 	/**
 	 * Constructeur vide nécessaire à un ManagedBean
@@ -34,40 +31,39 @@ public class LogoutManagedBean implements Serializable {
 
 	// Getters and Setters
 	/**
-	 * @return l'admin s'étant connecté
+	 * @return la session en cours
 	 */
-	public Admin getA() {
-		return a;
+	public HttpSession getMaSession() {
+		return maSession;
 	}
-
+	
 	/**
-	 * @param set
-	 *            l'admin du MB pour pouvoir l'enregistrer dans la session
+	 * @param la session
 	 */
-	public void setA(Admin a) {
-		this.a = a;
+	public void setMaSession(HttpSession maSession) {
+		this.maSession = maSession;
 	}
 
 	/**
 	 * Cette méthode permet de récupérer automatiquement la Session
-	 * L'annotation @PostConstruct permet de réaliser cette opération dès le
-	 * lancement
+	 * L'annotation @PostConstruct permet de réaliser cette opération dès le lancement
 	 */
 	// méthode @PostConstruct
 	@PostConstruct
 	public void init() {
-		this.a = (Admin) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("aSession");
+
+		// récupérer la session
+		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
 	}
 
 	// Méthode logout
 	/**
-	 * Méthode pour supprimer la session admin en cours et ramener à la page login
-	 * 
+	 * Méthode pour supprimer la session en cours et ramener à la page login
 	 * @return l'adresse du login
 	 */
 	public String executeLogout() {
-		;
+		maSession.invalidate();
 		return "login";
 	}
 

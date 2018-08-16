@@ -15,13 +15,13 @@
 
 				<h:form styleClass="form-horizontal">
 					<p:outputLabel for="type" value="Rechercher par :" />
-					<p:selectOneRadio id="type" value="#{prMB.type}" required="true" style="text-align: center; margin-left: 40%">
+					<p:selectOneRadio id="type" value="#{prMB.type}" required="true" style="text-align: center; margin-left: 40%" label="Type">
 						<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
 						<f:selectItem itemLabel="Catégorie" itemValue="cat" />
 					</p:selectOneRadio>
-					<p:inputText value="#{prMB.rech}" required="true" />
-					<h:commandButton value="Rechercher"
-						action="#{prMB.rechercherProduit}" />
+					<p:inputText value="#{prMB.rech}" required="true" label="Mot clé"/>
+					<p:commandButton value="Rechercher"
+						action="#{prMB.rechercherProduit}" ajax="false"/>
 				</h:form>
 
 				<h:form id="form" rendered="#{prMB.indice}" styleClass="form-horizontal">

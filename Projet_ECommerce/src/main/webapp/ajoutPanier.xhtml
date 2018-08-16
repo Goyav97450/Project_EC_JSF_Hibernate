@@ -21,7 +21,7 @@
 						</p:selectOneMenu>
 		Quantité: <p:inputText value="#{paMB.q}"></p:inputText>
 
-						<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>
+						<p:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 				<h1 class="message">
