@@ -2,6 +2,7 @@ package fr.adaming.managedBeans;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -44,6 +45,11 @@ public class ClientManagedBean {
 	 */
 	private List<Produit> listeProd;
 	/**
+	 * Attribut liste de clients servant à afficher la liste des clients selon
+	 * une recherche
+	 */
+	private List<Client> listeClients;
+	/**
 	 * Attribut qui servira a afficher ou non des tables
 	 */
 	private boolean ind;
@@ -82,4 +88,148 @@ public class ClientManagedBean {
 		this.clService = clService;
 	}
 
+	/**
+	 * @return the cl
+	 */
+	public Client getCl() {
+		return cl;
+	}
+
+	/**
+	 * @param cl
+	 *            the cl to set
+	 */
+	public void setCl(Client cl) {
+		this.cl = cl;
+	}
+
+	/**
+	 * @return the co
+	 */
+	public Commande getCo() {
+		return co;
+	}
+
+	/**
+	 * @param co
+	 *            the co to set
+	 */
+	public void setCo(Commande co) {
+		this.co = co;
+	}
+
+	/**
+	 * @return the cat
+	 */
+	public Categorie getCat() {
+		return cat;
+	}
+
+	/**
+	 * @param cat
+	 *            the cat to set
+	 */
+	public void setCat(Categorie cat) {
+		this.cat = cat;
+	}
+
+	/**
+	 * @return the listeCat
+	 */
+	public List<Categorie> getListeCat() {
+		return listeCat;
+	}
+
+	/**
+	 * @param listeCat
+	 *            the listeCat to set
+	 */
+	public void setListeCat(List<Categorie> listeCat) {
+		this.listeCat = listeCat;
+	}
+
+	/**
+	 * @return the listeProd
+	 */
+	public List<Produit> getListeProd() {
+		return listeProd;
+	}
+
+	/**
+	 * @param listeProd
+	 *            the listeProd to set
+	 */
+	public void setListeProd(List<Produit> listeProd) {
+		this.listeProd = listeProd;
+	}
+
+	/**
+	 * @return the listeClients
+	 */
+	public List<Client> getListeClients() {
+		return listeClients;
+	}
+
+	/**
+	 * @param listeClients
+	 *            the listeClients to set
+	 */
+	public void setListeClients(List<Client> listeClients) {
+		this.listeClients = listeClients;
+	}
+
+	/**
+	 * @return the ind
+	 */
+	public boolean isInd() {
+		return ind;
+	}
+
+	/**
+	 * @param ind
+	 *            the ind to set
+	 */
+	public void setInd(boolean ind) {
+		this.ind = ind;
+	}
+
+	/**
+	 * @return the rech
+	 */
+	public String getRech() {
+		return rech;
+	}
+
+	/**
+	 * @param rech
+	 *            the rech to set
+	 */
+	public void setRech(String rech) {
+		this.rech = rech;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	// méthode @PostConstruct
+	@PostConstruct
+	public void init() {
+
+		// récupérer la liste des categories, des produits et des ID Catégorie
+		listeClients = clService.getAllClient();
+
+	}
+	
 }

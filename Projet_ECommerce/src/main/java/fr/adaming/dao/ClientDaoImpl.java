@@ -87,7 +87,7 @@ public class ClientDaoImpl implements IClientDao {
 		Session s = sf.getCurrentSession();
 
 		// Requete HQL pour obtenir la liste des produits
-		String reqListCategorie = "FROM Clients";
+		String reqListCategorie = "FROM Client";
 		// Création de la requête
 		Query query = s.createQuery(reqListCategorie);
 		return query.list();
