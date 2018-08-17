@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/adminLayout.xhtml">
+
+	<ui:define name="title">Rechercher Client</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+				<h1 class="titreliste">
+					<h:outputText value="Sélection du mode de recherche" />
+				</h1>
+
+				<h:form styleClass="form-horizontal">
+					<p:selectOneRadio value="#{cAMB.idSelector}" onchange="submit()"
+						valueChangeListener="#{cAMB.changeType}">
+						<f:selectItem itemValue="false" itemLabel="Recherche par nom" />
+						<f:selectItem itemValue="true" itemLabel="Recherche par ID" />
+					</p:selectOneRadio>
+				</h:form>
+
+				<h:form rendered="#{cAMB.idSelector}" styleClass="form-horizontal">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="categorieSelector" value="Categorie:" />
+						<p:selectOneMenu id="categorieSelector"
+							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+							<f:selectItems value="#{cAMB.listeIdCat}" />
+						</p:selectOneMenu>
+						<p:commandButton value="Rechercher"
+							action="#{cAMB.rechercherCategorie}" ajax="false"/>
+					</h:panelGrid>
+				</h:form>
+
+				<h:form rendered="#{cAMB.catSelector}" styleClass="form-horizontal">
+					<h:panelGrid columns="2">
+		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" label="Nom Catégorie"/>
+						<p:commandButton value="Rechercher"
+							action="#{cAMB.rechercherCategorieParNom}" ajax="false"/>
+					</h:panelGrid>
+				</h:form>
+
+
+				<h1 class="titreliste">
+					<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
+				</h1>
+				<h:form rendered="#{cAMB.indice}" styleClass="form-horizontal">
+
+
+					<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
+						<p:column headerText="Id">
+							<h:outputText value="#{cat.idCategorie}" />
+						</p:column>
+
+						<p:column headerText="Description">
+							<h:outputText value="#{cat.description}" />
+						</p:column>
+
+						<p:column headerText="Nom">
+							<h:outputText value="#{cat.nomCategorie}" />
+						</p:column>
+
+						<p:column headerText="Photo">
+							<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+						</p:column>
+
+						<p:column headerText="Gestion">
+							<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+								update="tableCatAdmin">
+								<f:setPropertyActionListener value="#{cat.idCategorie}"
+									target="#{cAMB.cat.idCategorie}" />
+							</p:commandLink>
+							<br />
+							<p:commandLink value="Modifier" action="updateCategorie">
+								<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
+							</p:commandLink>
+							<br />
+							<p:commandLink value="Afficher les produits"
+								action="#{cAMB.rechercherProduitsByCat}">
+								<f:setPropertyActionListener value="#{cat.idCategorie}"
+									target="#{cAMB.cat.idCategorie}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+
+				<h1 class="message">
+					<h:messages />
+				</h1>
+
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -60,7 +60,7 @@ public class CategorieManagedBean implements Serializable {
 	 */
 	private boolean indice = false;
 	/**
-	 * Attribut catégorie selectoru qui permettra d'afficher les tables
+	 * Attribut catégorie selector qui permettra d'afficher les tables
 	 * dynamiquement dans la vue correspondante.
 	 */
 	private boolean catSelector = false;
