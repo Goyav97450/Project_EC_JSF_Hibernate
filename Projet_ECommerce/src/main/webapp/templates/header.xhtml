@@ -13,8 +13,13 @@
 	<!-- Définir le contenu du template -->
 	<ui:composition>
 		<div class="container-fluid commerceheader">
-			<h1>Marchambulants</h1>
-
+			<div class="row">
+				<div style="padding-top: 15px; padding-left: 15px; padding-bottom: 35px">
+					<h:graphicImage value="/resources/images/Logo Marchambulants.jpg"
+						width="8%" height="auto" style="float: left; border: solid black 1px" />
+					<h1 style="display: inline-block; text-align: center;">Marchambulants</h1>
+				</div>
+			</div>
 			<h:form styleClass="commercemenu">
 				<p:menubar>
 					<p:menuitem value="Accueil" url="accueil.xhtml" />
@@ -26,7 +31,7 @@
 							url="ajoutPanier.xhtml" />
 						<p:menuitem value="Votre panier" url="panier.xhtml" />
 					</p:submenu>
-					<p:menuitem value="Login" url="login.xhtml"/>
+					<p:menuitem value="Login" url="login.xhtml" />
 					<f:facet name="options">
 						<h:commandLink value="Logout" action="#{logout.executeLogout}">
 						</h:commandLink>
