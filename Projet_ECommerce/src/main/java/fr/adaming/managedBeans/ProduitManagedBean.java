@@ -410,4 +410,21 @@ public class ProduitManagedBean implements Serializable {
 
 	}
 
+	public String rechercherProduitByNom() {
+		// Appel de la méthode recherche par mot-clé
+		listeProd = prService.getProdByKeyWord(rech);
+		
+		if(listeProd!=null){
+		// mise à jour de l'indice
+		this.indice = true;
+		return "rechercherProduit";
+	}else{
+		FacesContext.getCurrentInstance().addMessage(null,
+		new FacesMessage("Produit introuvable"));
+		// mise à jour de l'indice
+		this.indice = false;
+		return "accueil";
+	}
+	}
+
 }

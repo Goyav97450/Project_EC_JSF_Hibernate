@@ -18,7 +18,7 @@
 							value="#{aMB.a.idAdmin}" required="true" label="Login"/>
 		Password: <p:password placeholder="Entrez votre mot de passe"
 							value="#{aMB.a.mdp}" required="true" label="Password"/>
-						<p:commandButton value="Connexion" action="#{aMB.connexion}" update="@all"/>
+						<p:commandButton value="Connexion" action="#{aMB.connexion}" update="@all" ajax="false"/>
 					</h:panelGrid>
 				</h:form>
 

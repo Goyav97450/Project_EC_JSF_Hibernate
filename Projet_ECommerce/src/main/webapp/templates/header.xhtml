@@ -14,10 +14,20 @@
 	<ui:composition>
 		<div class="container-fluid commerceheader">
 			<div class="row">
-				<div style="padding-top: 15px; padding-left: 15px; padding-bottom: 35px">
+				<div
+					style="padding-top: 15px; padding-left: 15px; padding-bottom: 15px">
 					<h:graphicImage value="/resources/images/Logo Marchambulants.jpg"
-						width="8%" height="auto" style="float: left; border: solid black 1px" />
+						width="8%" height="auto"
+						style="float: left; border: solid black 1px" />
 					<h1 style="display: inline-block; text-align: center;">Marchambulants</h1>
+				</div>
+				<div style="container-fluid">
+					<h:form styleClass="form-horizontal" style="margin-bottom: 15px">
+						<p:inputText value="#{prMB.rech}" required="true" label="Mot clé"
+							placeholder="Rechercher un produit..." />
+						<p:commandButton value="Rechercher"
+							action="#{prMB.rechercherProduitByNom}" ajax="false" />
+					</h:form>
 				</div>
 			</div>
 			<h:form styleClass="commercemenu">
