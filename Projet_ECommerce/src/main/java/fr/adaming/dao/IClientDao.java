@@ -1,5 +1,7 @@
 package fr.adaming.dao;
 
+import java.util.List;
+
 import fr.adaming.model.Client;
 
 /**
@@ -16,6 +18,13 @@ public interface IClientDao {
 	 */
 	public int saveClient(Client cl);
 	
+	/**
+	 * <b>getAllClient</b> Cette méthode permet à un admin de récupérer la
+	 * liste complète des clients.
+	 * 
+	 * @return la liste des clients existantes en base de donnée
+	 */
+	public List<Client> getAllClient();
 	
 	/**<b>getClientByMail</b>
 	 * Cette méthode permet de récupérer un client par son adresse mail

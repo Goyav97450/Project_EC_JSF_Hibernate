@@ -2,8 +2,6 @@ package fr.adaming.dao;
 
 import java.util.List;
 
-import javax.persistence.NoResultException;
-
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
