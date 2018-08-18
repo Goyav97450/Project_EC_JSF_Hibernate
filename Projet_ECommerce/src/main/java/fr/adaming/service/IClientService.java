@@ -29,7 +29,7 @@ public interface IClientService {
 	 *            Client à retrouver
 	 * @return Client de récupérer à partir de la DB
 	 */
-	public Client getClientByMail(Client cl);
+	public Client getClientByMail(String rech);
 
 	/**
 	 * <b>getClientById</b> Cette méthode permet de récupérer un client par son
@@ -48,4 +48,12 @@ public interface IClientService {
 	 * @return la liste des clients existantes en base de donnée
 	 */
 	public List<Client> getAllClient();
+
+	/**
+	 * <b>getAllCatId</b> Cette méthode permet de récupérer la liste des ID
+	 * catégorie
+	 * 
+	 * @return la liste des noms catégories
+	 */
+	public List<String> getAllClIdService();
 }

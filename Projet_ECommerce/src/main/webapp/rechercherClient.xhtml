@@ -18,73 +18,60 @@
 				</h1>
 
 				<h:form styleClass="form-horizontal">
-					<p:selectOneRadio value="#{cAMB.idSelector}" onchange="submit()"
-						valueChangeListener="#{cAMB.changeType}">
-						<f:selectItem itemValue="false" itemLabel="Recherche par nom" />
+					<p:selectOneRadio value="#{clMB.idClSelector}" onchange="submit()"
+						valueChangeListener="#{clMB.changeType}">
+						<f:selectItem itemValue="false" itemLabel="Recherche par email" />
 						<f:selectItem itemValue="true" itemLabel="Recherche par ID" />
 					</p:selectOneRadio>
 				</h:form>
 
-				<h:form rendered="#{cAMB.idSelector}" styleClass="form-horizontal">
+				<h:form rendered="#{clMB.idClSelector}" styleClass="form-horizontal">
 					<h:panelGrid columns="2">
-						<p:outputLabel for="categorieSelector" value="Categorie:" />
-						<p:selectOneMenu id="categorieSelector"
-							value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
-							<f:selectItems value="#{cAMB.listeIdCat}" />
+						<p:outputLabel for="clientSelector" value="Client:" />
+						<p:selectOneMenu id="clientSelector" value="#{clMB.cl.idClient}"
+							lazy="true" style="width:125px">
+							<f:selectItems value="#{clMB.listeIdClients}" />
 						</p:selectOneMenu>
 						<p:commandButton value="Rechercher"
-							action="#{cAMB.rechercherCategorie}" ajax="false"/>
+							action="#{clMB.rechercherClient}" ajax="false" />
 					</h:panelGrid>
 				</h:form>
 
-				<h:form rendered="#{cAMB.catSelector}" styleClass="form-horizontal">
+				<h:form rendered="#{clMB.clSelector}" styleClass="form-horizontal">
 					<h:panelGrid columns="2">
-		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" label="Nom Catégorie"/>
+		Email Client: <h:inputText value="#{clMB.rech}" required="true"
+							label="Email Client" />
 						<p:commandButton value="Rechercher"
-							action="#{cAMB.rechercherCategorieParNom}" ajax="false"/>
+							action="#{clMB.rechercherClientParMail}" ajax="false" />
 					</h:panelGrid>
 				</h:form>
 
 
 				<h1 class="titreliste">
-					<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
+					<h:outputText rendered="#{clMB.ind}" value="Categorie Trouvée"></h:outputText>
 				</h1>
-				<h:form rendered="#{cAMB.indice}" styleClass="form-horizontal">
+				<h:form rendered="#{clMB.ind}" styleClass="form-horizontal">
 
 
-					<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
+					<p:dataTable var="cl" value="#{clMB.listeClients}"
+						id="tableCatAdmin">
 						<p:column headerText="Id">
-							<h:outputText value="#{cat.idCategorie}" />
-						</p:column>
-
-						<p:column headerText="Description">
-							<h:outputText value="#{cat.description}" />
+							<h:outputText value="#{cl.idClient}" />
 						</p:column>
 
 						<p:column headerText="Nom">
-							<h:outputText value="#{cat.nomCategorie}" />
+							<h:outputText value="#{cl.nomClient}" />
 						</p:column>
 
-						<p:column headerText="Photo">
-							<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+						<p:column headerText="Adresse">
+							<h:outputText value="#{cl.adresse}" />
 						</p:column>
 
-						<p:column headerText="Gestion">
-							<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
-								update="tableCatAdmin">
-								<f:setPropertyActionListener value="#{cat.idCategorie}"
-									target="#{cAMB.cat.idCategorie}" />
-							</p:commandLink>
-							<br />
-							<p:commandLink value="Modifier" action="updateCategorie">
-								<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
-							</p:commandLink>
-							<br />
-							<p:commandLink value="Afficher les produits"
-								action="#{cAMB.rechercherProduitsByCat}">
-								<f:setPropertyActionListener value="#{cat.idCategorie}"
-									target="#{cAMB.cat.idCategorie}" />
-							</p:commandLink>
+						<p:column headerText="Email">
+							<h:outputText value="#{cl.email}" />
+						</p:column>
+						<p:column headerText="Telephone">
+							<h:outputText value="#{cl.tel}" />
 						</p:column>
 					</p:dataTable>
 

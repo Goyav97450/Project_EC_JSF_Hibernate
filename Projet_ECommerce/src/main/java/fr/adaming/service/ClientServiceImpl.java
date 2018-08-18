@@ -34,9 +34,9 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	@Override
-	public Client getClientByMail(Client cl) {
+	public Client getClientByMail(String rech) {
 		
-		return clDao.getClientByMail(cl);
+		return clDao.getClientByMail(rech);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class ClientServiceImpl implements IClientService{
 	@Override
 	public List<Client> getAllClient() {
 		return clDao.getAllClient();
+	}
+
+	@Override
+	public List<String> getAllClIdService() {
+		return clDao.getAllClId();
 	}
 
 }

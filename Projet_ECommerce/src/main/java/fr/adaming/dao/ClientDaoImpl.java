@@ -54,18 +54,18 @@ public class ClientDaoImpl implements IClientDao {
 	}
 
 	@Override
-	public Client getClientByMail(Client cl) {
+	public Client getClientByMail(String rech) {
 		// Récupération de la session hibernate
 		Session s = sf.getCurrentSession();
 
 		// Création de la requête HQL
-		String req = "FROM Client cl WHERE cl.mail=:pMail";
+		String req = "FROM Client cl WHERE cl.email LIKE :pMail";
 
 		// Création d'une query Hibernate
 		Query query = s.createQuery(req);
 
 		// Paramétrages de la requpête
-		String param = "%" + cl.getEmail() + "%";
+		String param = "%" + rech + "%";
 		query.setParameter("pMail", param);
 
 		return (Client) query.uniqueResult();
@@ -91,6 +91,24 @@ public class ClientDaoImpl implements IClientDao {
 		// Création de la requête
 		Query query = s.createQuery(reqListCategorie);
 		return query.list();
+	}
+
+	@Override
+	public List<String> getAllClId() {
+		// récupérer la session
+		Session s = sf.getCurrentSession();
+
+		// Requete hQL pour obtenir la liste des ID catégories
+		String reqListClient = "SELECT cl.idClient FROM Client as cl";
+
+		// Récupération d'une query
+		Query query = s.createQuery(reqListClient);
+
+		// récupération du résultat
+		@SuppressWarnings("unchecked")
+		List<String> listIdClient = query.list();
+
+		return listIdClient;
 	}
 
 }

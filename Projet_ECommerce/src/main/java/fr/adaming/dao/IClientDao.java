@@ -31,7 +31,7 @@ public interface IClientDao {
 	 * @param le Client à retrouver
 	 * @return Client de récupérer à partir de la DB
 	 */
-	public Client getClientByMail(Client cl);
+	public Client getClientByMail(String rech);
 	
 	/**<b>getClientById</b>
 	 * Cette méthode permet de récupérer un client par son ID
@@ -39,4 +39,10 @@ public interface IClientDao {
 	 * @return Client de récupérer à partir de la DB
 	 */
 	public Client getClientById(Client cl);
+	
+	/**
+	 * <b>getAllCltId</b> Cette méthode permet de récupérer la liste des ID client
+	 * @return la liste des ID clients
+	 */
+	public List<String> getAllClId();
 }

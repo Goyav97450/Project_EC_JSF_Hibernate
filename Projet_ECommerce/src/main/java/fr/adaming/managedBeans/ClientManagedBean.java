@@ -3,9 +3,12 @@ package fr.adaming.managedBeans;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
@@ -49,6 +52,11 @@ public class ClientManagedBean {
 	 * une recherche
 	 */
 	private List<Client> listeClients;
+
+	/**
+	 * Attribut liste des ID clients servant à afficher la liste des ID dans un menu déroulant
+	 */
+	private List<String> listeIdClients;
 	/**
 	 * Attribut qui servira a afficher ou non des tables
 	 */
@@ -63,6 +71,16 @@ public class ClientManagedBean {
 	 * catégorie
 	 */
 	private String type;
+	/**
+	 * Attribut client selector qui permettra d'afficher les tables
+	 * dynamiquement dans la vue correspondante.
+	 */
+	private boolean clSelector = false;
+	/**
+	 * Attribut idCLSelector qui permettra d'afficher les tables dynamiquement
+	 * dans la vue correspondante.
+	 */
+	private boolean idClSelector = true;
 
 	/**
 	 * Constructeur vide nécessaire à un ManagedBean
@@ -223,13 +241,110 @@ public class ClientManagedBean {
 		this.type = type;
 	}
 
+	/**
+	 * @return le statut sélecteur client
+	 */
+	public boolean isClSelector() {
+		return clSelector;
+	}
+
+	/**
+	 * @param le
+	 *            statut sélecteur client choisi
+	 */
+	public void setClSelector(boolean clSelector) {
+		this.clSelector = clSelector;
+	}
+
+	/**
+	 * @return le statut du sélecteur ID
+	 */
+	public boolean isIdClSelector() {
+		return idClSelector;
+	}
+
+	/**
+	 * @param le
+	 *            statut du sélecteur ID choisi
+	 */
+	public void setIdClSelector(boolean idClSelector) {
+		this.idClSelector = idClSelector;
+	}
+
+	/**
+	 * @return la liste des ID clients
+	 */
+	public List<String> getListeIdClients() {
+		return listeIdClients;
+	}
+
+	/**
+	 * @param la liste des ID clients
+	 */
+	public void setListeIdClients(List<String> listeIdClients) {
+		this.listeIdClients = listeIdClients;
+	}
+
 	// méthode @PostConstruct
 	@PostConstruct
 	public void init() {
 
 		// récupérer la liste des categories, des produits et des ID Catégorie
 		listeClients = clService.getAllClient();
+		listeIdClients = clService.getAllClIdService();
 
 	}
-	
+
+	// Méthodes
+	/**
+	 * Méthode pour chercher un client par son ID dans la BD
+	 * 
+	 * @return l'adresse de la page à afficher
+	 */
+	public String rechercherClient() {
+		Client clFound = clService.getClientById(this.cl);
+
+		if (clFound != null) {
+			this.cl = clFound;
+			this.ind = true;
+			return "rechercherClient";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Client introuvable"));
+			return "rechercherClient";
+		}
+
+	}
+
+	/**
+	 * Méthode pour chercher un client par son adresse mail dans la BD
+	 * 
+	 * @return l'adresse de la page à afficher
+	 */
+	public String rechercherClientParMail() {
+		Client clFound = clService.getClientByMail(this.rech);
+
+		if (clFound != null) {
+			this.cl = clFound;
+			this.ind = true;
+			return "rechercherClient";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Client introuvable"));
+			return "rechercherClient";
+		}
+
+	}
+
+	/**
+	 * Méthode pour changer l'affichage de formulaires dans la vue recherche
+	 * client
+	 * 
+	 * @return l'adresse de la page à afficher
+	 */
+	public void changeType(ValueChangeEvent e) {
+		this.clSelector = true;
+		this.idClSelector = false;
+	}
+
 }

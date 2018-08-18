@@ -69,12 +69,9 @@ public interface ICategorieService {
 	public Categorie getCatByNomService(String rech);
 
 	/**
-	 * <b>getAllCatId</b> Cette méthode permet de récupérer un catégorie par son
-	 * nom
+	 * <b>getAllCatId</b> Cette méthode permet de récupérer la liste des ID catégorie
 	 * 
-	 * @param Nom
-	 *            de la catégorie recherchée
-	 * @return la catégorie correspondant
+	 * @return la liste des noms catégories
 	 */
 	public List<String> getAllCatIdService();
 }
