@@ -27,7 +27,7 @@
 							<f:selectItem itemLabel="Non" itemValue="Non" />
 						</p:selectOneMenu>
 						<p:outputLabel for="promoIndice" value="Nouveau prix:" />
-						<p:knob id="promoIndice" labelTemplate="{value}%" value="#{prMB.promoIndice}"/>
+						<p:knob id="promoIndice" labelTemplate="{value}" value="#{prMB.pr.prix}"/>
 						<p:commandButton value="Confirmer offre promo"
 							action="#{prMB.attribuerOffre}" ajax="false" />
 					</h:panelGrid>

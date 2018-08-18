@@ -470,14 +470,8 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String attribuerOffre() {
-
-		// Attribution du nouveau prix au produit
-		float prInd = this.promoIndice;
-		Produit soldePr = this.pr;
-		soldePr.setPrix(this.pr.getPrix() * (1-(0.1*prInd)));
-
 		// Appel de la méthode recherche par mot-clé
-		int verif = prService.attribuerOffre(soldePr);
+		int verif = prService.attribuerOffre(this.pr);
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
