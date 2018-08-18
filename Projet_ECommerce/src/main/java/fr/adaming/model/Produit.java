@@ -72,6 +72,13 @@ public class Produit implements Serializable {
 	@Lob
 	private byte[] photo;
 
+	/**
+	 * 
+	 * @Transient evite que l'attribut selectionne ne soit integre a la base de
+	 *            donnees.
+	 */
+	private String offre;
+
 	// Transformation de l'association UML en Java
 	/**
 	 * On indique grâce à ManyToOne la relation entre la Classe Produit et la
@@ -92,7 +99,7 @@ public class Produit implements Serializable {
 	 *            tous les paramètres de produit y compris son identifiant.
 	 */
 	public Produit(long idProduit, String designation, String description, double prix, int quantite,
-			boolean selectionne, byte[] photo) {
+			boolean selectionne, byte[] photo, String offre) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -101,6 +108,7 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.offre = offre;
 	}
 
 	/**
@@ -109,8 +117,8 @@ public class Produit implements Serializable {
 	 * @param regroupe
 	 *            tous les paramètres de produit, sauf son identifiant.
 	 */
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			byte[] photo) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte[] photo,
+			String offre) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -118,6 +126,7 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.offre = offre;
 	}
 
 	/**
@@ -313,11 +322,26 @@ public class Produit implements Serializable {
 		this.image = image;
 	}
 
+	/**
+	 * @return le statut du produit (en solde ou non)
+	 */
+	public String getOffre() {
+		return offre;
+	}
+
+	/**
+	 * @param le
+	 *            produit dont on veut changer le statut
+	 */
+	public void setOffre(String offre) {
+		this.offre = offre;
+	}
+
 	// ToString
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", designation=" + designation + ", description=" + description
 				+ ", prix=" + prix + ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo=" + photo
-				+ "]";
+				+ ", offre=" + offre + "]";
 	}
 }

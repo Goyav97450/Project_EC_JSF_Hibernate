@@ -54,7 +54,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		// récup du query
 		Query query = s.createQuery(req);
 		List<Produit> listProduit = query.list();
-		
+
 		for (Produit pr : listProduit) {
 			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
 		}
@@ -211,6 +211,27 @@ public class ProduitDaoImpl implements IProduitDao {
 		List<String> listIdProduit = query.list();
 
 		return listIdProduit;
+	}
+
+	@Override
+	public int attribuerOffre(Produit pr) {
+		// récupérer la session
+		Session s = sf.getCurrentSession();
+
+		// Requête HQL
+		String req = "UPDATE Produit pr SET pr.offre=:pOff, pr.prix=:pPrix WHERE pr.idProduit=:pIdp";
+
+		// récup du query
+		Query query = s.createQuery(req);
+
+		// Paramétrage
+		query.setParameter("pOff", pr.getOffre());
+		query.setParameter("pPrix", pr.getPrix());
+		query.setParameter("pIdp", pr.getIdProduit());
+
+		int verif = query.executeUpdate();
+
+		return verif;
 	}
 
 }

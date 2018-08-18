@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/adminLayout.xhtml">
+
+	<ui:define name="title">Ajouter Promotion</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+
+				<h:form styleClass="form-horizontal" style="display:inline-block">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="produitSelector" value="Produit ID:" />
+						<p:selectOneMenu id="produitSelector" value="#{prMB.pr.idProduit}"
+							lazy="true" style="width:125px">
+							<f:selectItems value="#{prMB.listeIdProd}" />
+						</p:selectOneMenu>
+						<p:outputLabel for="promoSelector" value="Statut de la promotion:" />
+						<p:selectOneMenu id="promoSelector" value="#{prMB.pr.offre}"
+							lazy="true" style="width:125px">
+							<f:selectItem itemLabel="Oui" itemValue="Oui" />
+							<f:selectItem itemLabel="Non" itemValue="Non" />
+						</p:selectOneMenu>
+						<p:outputLabel for="promoIndice" value="Nouveau prix:" />
+						<p:knob id="promoIndice" labelTemplate="{value}%" value="#{prMB.promoIndice}"/>
+						<p:commandButton value="Confirmer offre promo"
+							action="#{prMB.attribuerOffre}" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+
+				<h1 class="message">
+					<h:messages />
+				</h1>
+
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

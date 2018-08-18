@@ -79,18 +79,26 @@ public interface IProduitService {
 	public List<Produit> getProdByKeyWord(String keyWord);
 
 	/**
-	 * <b>getAllProdId</b>Cette méthode permet de récupérer la liste des ID de tous les
-	 * produits.
+	 * <b>getAllProdId</b>Cette méthode permet de récupérer la liste des ID de
+	 * tous les produits.
 	 * 
 	 * @return Une liste des ID de tous les produits dans la base de données.
 	 */
 	public List<String> getAllProdIdService();
 
 	/**
-	 * <b>getAllProdNom</b>Cette méthode permet de récupérer la liste des noms de tous les
-	 * produits.
+	 * <b>getAllProdNom</b>Cette méthode permet de récupérer la liste des noms
+	 * de tous les produits.
 	 * 
 	 * @return Une liste des noms de tous les produits dans la base de données.
 	 */
 	public List<String> getAllProdNom();
+
+	/**
+	 * <b>attribuerOffre</b>Cette méthode permet de mettre un produit en solde
+	 * et de lui attribuer un nouveau prix.
+	 * 
+	 * @return une int pour vérifier que la mise a jour à bien été faite.
+	 */
+	public int attribuerOffre(Produit pr);
 }

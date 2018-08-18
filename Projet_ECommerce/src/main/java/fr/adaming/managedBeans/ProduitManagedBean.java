@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.model.UploadedFile;
 
@@ -62,11 +63,24 @@ public class ProduitManagedBean implements Serializable {
 	 * mot-clé
 	 */
 	private String rech;
+
 	/**
 	 * Attribut type permettant de sélectionner les modes de recherche dans la
 	 * vue.
 	 */
 	private String type;
+
+	/**
+	 * Attribut promoIndice permettant de calculer le nouveau prix d'un produit
+	 * en solde.
+	 */
+	private float promoIndice;
+
+	/**
+	 * Attribut statutPromo permettant d'attribuer un statut de produit en solde
+	 * à un produit
+	 */
+	private String statutPromo;
 
 	// Transformation de l'association UML en Java
 	/**
@@ -272,6 +286,35 @@ public class ProduitManagedBean implements Serializable {
 		this.listeFiltreProd = listeFiltreProd;
 	}
 
+	/**
+	 * @return l'indice de variation du prix d'un produit en promo
+	 */
+	public float getPromoIndice() {
+		return promoIndice;
+	}
+
+	/**
+	 * @param l'indice
+	 *            de variation du prix d'un produit en promo
+	 */
+	public void setPromoIndice(float promoIndice) {
+		this.promoIndice = promoIndice;
+	}
+
+	/**
+	 * @return le statut d'un produit
+	 */
+	public String getStatutPromo() {
+		return statutPromo;
+	}
+
+	/**
+	 * @param le statut d'un produit
+	 */
+	public void setStatutPromo(String statutPromo) {
+		this.statutPromo = statutPromo;
+	}
+
 	// Méthodes
 	/**
 	 * Méthode pour ajouter un produit à la BD
@@ -413,18 +456,53 @@ public class ProduitManagedBean implements Serializable {
 	public String rechercherProduitByNom() {
 		// Appel de la méthode recherche par mot-clé
 		listeProd = prService.getProdByKeyWord(rech);
-		
-		if(listeProd!=null){
-		// mise à jour de l'indice
-		this.indice = true;
-		return "rechercherProduit";
-	}else{
-		FacesContext.getCurrentInstance().addMessage(null,
-		new FacesMessage("Produit introuvable"));
-		// mise à jour de l'indice
-		this.indice = false;
-		return "accueil";
-	}
+
+		if (listeProd != null) {
+			// mise à jour de l'indice
+			this.indice = true;
+			return "rechercherProduit";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
+			// mise à jour de l'indice
+			this.indice = false;
+			return "accueil";
+		}
 	}
 
+	public String attribuerOffre() {
+
+		// Attribution du nouveau prix au produit
+		float prInd = this.promoIndice;
+		Produit soldePr = this.pr;
+		soldePr.setPrix(this.pr.getPrix() * (1-(0.1*prInd)));
+
+		// Appel de la méthode recherche par mot-clé
+		int verif = prService.attribuerOffre(soldePr);
+
+		if (verif != 0) {
+			// récupérer la nouvelle liste de la BD
+			List<Produit> newListeProd = prService.getAllProduitService();
+
+			// mettre à jour la liste dans l'attribut du MB
+			listeProd = newListeProd;
+			// retour à l'accueil
+			return "accueilAdmin";
+
+		} else {
+			// Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification echouée"));
+			return "attribuerOffre";
+		}
+	}
+
+	/**
+	 * Méthode pour changer l'affichage de formulaires dans la vue recherche
+	 * catégorie
+	 * 
+	 * @return l'adresse de la page à afficher
+	 */
+	public void changeType(ValueChangeEvent e) {
+		this.indice=true;
+	}
+	
 }
