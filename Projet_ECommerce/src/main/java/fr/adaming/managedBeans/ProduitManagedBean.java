@@ -71,16 +71,15 @@ public class ProduitManagedBean implements Serializable {
 	private String type;
 
 	/**
-	 * Attribut promoIndice permettant de calculer le nouveau prix d'un produit
-	 * en solde.
+	 * Attribut promoIndice permettant de calculer la réduction du prix d'un produit
 	 */
-	private float promoIndice;
+	private int promoIndice;
 
 	/**
-	 * Attribut statutPromo permettant d'attribuer un statut de produit en solde
+	 * Attribut reduction permettant d'attribuer une réduction de prix
 	 * à un produit
 	 */
-	private String statutPromo;
+	private double reduction;
 
 	// Transformation de l'association UML en Java
 	/**
@@ -289,7 +288,7 @@ public class ProduitManagedBean implements Serializable {
 	/**
 	 * @return l'indice de variation du prix d'un produit en promo
 	 */
-	public float getPromoIndice() {
+	public int getPromoIndice() {
 		return promoIndice;
 	}
 
@@ -297,22 +296,22 @@ public class ProduitManagedBean implements Serializable {
 	 * @param l'indice
 	 *            de variation du prix d'un produit en promo
 	 */
-	public void setPromoIndice(float promoIndice) {
+	public void setPromoIndice(int promoIndice) {
 		this.promoIndice = promoIndice;
 	}
 
 	/**
-	 * @return le statut d'un produit
+	 * @return the reduction
 	 */
-	public String getStatutPromo() {
-		return statutPromo;
+	public double getReduction() {
+		return reduction;
 	}
 
 	/**
-	 * @param le statut d'un produit
+	 * @param reduction the reduction to set
 	 */
-	public void setStatutPromo(String statutPromo) {
-		this.statutPromo = statutPromo;
+	public void setReduction(double reduction) {
+		this.reduction = reduction;
 	}
 
 	// Méthodes
@@ -470,6 +469,9 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String attribuerOffre() {
+		//Attribuer le nouveau prix au produit
+		this.pr.setPrix(this.pr.getPrix()*(this.promoIndice/100));
+		
 		// Appel de la méthode recherche par mot-clé
 		int verif = prService.attribuerOffre(this.pr);
 
