@@ -102,4 +102,12 @@ public interface IProduitDao {
 	 * @return une int pour vérifier que la mise a jour à bien été faite.
 	 */
 	public int attribuerOffre(Produit pr);
+	
+	/**
+	 * <b>getProdEnSolde</b>Cette méthode permet de récupérer une 
+	 * liste des produits en solde.
+	 * 
+	 * @return une int pour vérifier que la mise a jour à bien été faite.
+	 */
+	public List<Produit> getProdEnSolde(Produit pr);
 }

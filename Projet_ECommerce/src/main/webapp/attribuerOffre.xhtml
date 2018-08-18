@@ -26,14 +26,9 @@
 							<f:selectItem itemLabel="Oui" itemValue="Oui" />
 							<f:selectItem itemLabel="Non" itemValue="Non" />
 						</p:selectOneMenu>
-						<p:outputLabel for="prixChoix" value="Prix du produit:" />
-						<p:inputText id="prixChoix" value="#{prMB.pr.prix}" label="Prix"
-							validatorMessage="Le prix doit être positif.">
-							<f:validateDoubleRange minimum="0.1" maximum="10000"></f:validateDoubleRange>
-						</p:inputText>
 						<p:outputLabel for="promoIndice" value="Réduction:" />
 						<p:knob id="promoIndice" labelTemplate="{value}%"
-							value="#{prMB.promoIndice}"/>
+							value="#{prMB.promoIndice}" />
 						<p:commandButton value="Confirmer offre promo"
 							action="#{prMB.attribuerOffre}" ajax="false" />
 					</h:panelGrid>

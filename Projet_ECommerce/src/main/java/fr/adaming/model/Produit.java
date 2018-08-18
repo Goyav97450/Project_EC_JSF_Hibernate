@@ -77,7 +77,7 @@ public class Produit implements Serializable {
 	 * @Transient evite que l'attribut selectionne ne soit integre a la base de
 	 *            donnees.
 	 */
-	private String offre;
+	private String offre="Non";
 
 	// Transformation de l'association UML en Java
 	/**

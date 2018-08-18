@@ -234,4 +234,34 @@ public class ProduitDaoImpl implements IProduitDao {
 		return verif;
 	}
 
+	@Override
+	public List<Produit> getProdEnSolde(Produit pr) {
+		try {
+			// récupérer la session
+			Session s = sf.getCurrentSession();
+
+			// Création d'une requête HQL
+			String req = "FROM Produit p WHERE p.offre LIKE :pOff";
+
+			// Récupération d'une query
+			Query query = s.createQuery(req);
+
+			// Passage de l'entrée en expression like
+			query.setParameter("pOff", "%Oui%");
+			
+			// Récupération de la liste
+			@SuppressWarnings("unchecked")
+			List<Produit> listProduit = query.list();
+
+			for (Produit prList : listProduit) {
+				prList.setImage("data:image/png);base64," + Base64.encodeBase64String(prList.getPhoto()));
+			}
+
+			return listProduit;
+		} catch (NullPointerException ex) {
+
+			ex.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -86,4 +86,9 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.attribuerOffre(pr);
 	}
 
+	@Override
+	public List<Produit> getProdEnSolde(Produit pr) {
+		return prDao.getProdEnSolde(pr);
+	}
+
 }

@@ -37,7 +37,33 @@
 					</p:carousel>
 
 				</h:form>
+				<h:form styleClass="form-horizontal">
+					<p:carousel value="#{prMB.listeProdEnSolde}" headerText="En Solde!"
+						var="pr" itemStyle="text-align:center" responsive="true">
+						<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+							columnClasses="label,value" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<f:facet name="header">
+								<h:graphicImage value="#{pr.image}" width="100px"
+									height="100px" />
+							</f:facet>
 
+							<h:outputText value="Id:" />
+							<h:outputText value="#{pr.idProduit}" />
+
+							<h:outputText value="Nom:" />
+							<h:outputText value="#{pr.designation}" />
+
+							<h:outputText value="Description" />
+							<h:outputText value="#{pr.description}" />
+							
+							<h:outputText value="Prix" />
+							<h:outputText value="#{pr.prix}" />
+						</p:panelGrid>
+
+					</p:carousel>
+
+				</h:form>
 			</h:body>
 		</div>
 	</ui:define>

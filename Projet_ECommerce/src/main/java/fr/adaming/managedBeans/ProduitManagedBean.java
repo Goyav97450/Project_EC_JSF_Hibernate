@@ -49,6 +49,11 @@ public class ProduitManagedBean implements Serializable {
 	 */
 	private List<Produit> listeFiltreProd;
 	/**
+	 * Attribut liste des Produits en solde permettant d'afficher tous les produits en solde
+	 */
+	private List<Produit> listeProdEnSolde;
+
+	/**
 	 * Attribut indice qui permettra d'afficher les tables dynamiquement dans la
 	 * vue correspondante.
 	 */
@@ -71,15 +76,10 @@ public class ProduitManagedBean implements Serializable {
 	private String type;
 
 	/**
-	 * Attribut promoIndice permettant de calculer la réduction du prix d'un produit
+	 * Attribut promoIndice permettant de calculer la réduction du prix d'un
+	 * produit
 	 */
 	private int promoIndice;
-
-	/**
-	 * Attribut reduction permettant d'attribuer une réduction de prix
-	 * à un produit
-	 */
-	private double reduction;
 
 	// Transformation de l'association UML en Java
 	/**
@@ -131,6 +131,7 @@ public class ProduitManagedBean implements Serializable {
 		 */
 		listeProd = prService.getAllProduitService();
 		listeIdProd = prService.getAllProdIdService();
+		listeProdEnSolde = prService.getProdEnSolde(this.pr);
 
 	}
 
@@ -301,17 +302,17 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	/**
-	 * @return the reduction
+	 * @return la liste des produits en solde
 	 */
-	public double getReduction() {
-		return reduction;
+	public List<Produit> getListeProdEnSolde() {
+		return listeProdEnSolde;
 	}
 
 	/**
-	 * @param reduction the reduction to set
+	 * @param produits en solde
 	 */
-	public void setReduction(double reduction) {
-		this.reduction = reduction;
+	public void setListeProdEnSolde(List<Produit> listeProdEnSolde) {
+		this.listeProdEnSolde = listeProdEnSolde;
 	}
 
 	// Méthodes
@@ -469,9 +470,12 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String attribuerOffre() {
-		//Attribuer le nouveau prix au produit
-		this.pr.setPrix(this.pr.getPrix()*(this.promoIndice/100));
-		
+		// Récupérer le produit dans la base de données grâce à son ID
+		Produit pOut = prService.getByIdProduitService(this.pr);
+
+		// Attribuer le nouveau prix au produit
+		pOut.setPrix(pOut.getPrix() * (this.promoIndice / 100));
+
 		// Appel de la méthode recherche par mot-clé
 		int verif = prService.attribuerOffre(this.pr);
 
@@ -498,7 +502,7 @@ public class ProduitManagedBean implements Serializable {
 	 * @return l'adresse de la page à afficher
 	 */
 	public void changeType(ValueChangeEvent e) {
-		this.indice=true;
+		this.indice = true;
 	}
-	
+
 }
