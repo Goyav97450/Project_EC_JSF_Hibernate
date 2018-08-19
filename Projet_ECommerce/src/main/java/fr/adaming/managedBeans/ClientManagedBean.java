@@ -14,7 +14,9 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.IProduitService;
 
 /**
@@ -94,7 +96,7 @@ public class ClientManagedBean {
 
 	// Transformation de l'association UML en Java
 	/**
-	 * Transformation de l'association UML en JAVA L'annotation @EJB permet
+	 * Transformation de l'association UML en JAVA permet
 	 * d'établir un couplage faible entre les services.
 	 */
 	@ManagedProperty(value = "#{clService}")
@@ -104,6 +106,46 @@ public class ClientManagedBean {
 	// @ManagedProperty)
 	public void setClService(IClientService clService) {
 		this.clService = clService;
+	}
+
+	/**
+	 * Transformation de l'association UML en JAVA L'annotation @EJB permet
+	 * d'établir un couplage faible entre les services.
+	 */
+	@ManagedProperty(value = "#{prService}")
+	private IProduitService prService;
+
+	// Setter obligatoire pour l'injection de dépendance en JSF (utilisant
+	// @ManagedProperty)
+	public void setPrService(IProduitService prService) {
+		this.prService = prService;
+	}
+	
+	/**
+	 * Transformation de l'association UML en JAVA L'annotation @EJB permet
+	 * d'établir un couplage faible entre les services.
+	 */
+	@ManagedProperty(value = "#{catService}")
+	private ICategorieService caService;
+
+	// Setter obligatoire pour l'injection de dépendance en JSF (utilisant
+	// @ManagedProperty)
+
+	public void setCaService(ICategorieService caService) {
+		this.caService = caService;
+	}
+	
+	/**
+	 * Transformation de l'association UML en JAVA L'annotation @ManagedProperty permet
+	 * d'établir un couplage faible entre les services.
+	 */
+	@ManagedProperty(value = "#{coService}")
+	private ICommandeService coService;
+	
+	// Setter obligatoire pour l'injection de dépendance en JSF (utilisant
+	// @ManagedProperty)
+	public void setCoService(ICommandeService coService) {
+		this.coService = coService;
 	}
 
 	/**
@@ -345,6 +387,41 @@ public class ClientManagedBean {
 	public void changeType(ValueChangeEvent e) {
 		this.clSelector = true;
 		this.idClSelector = false;
+	}
+	
+	/**
+	 * Méthode pour afficher les produits selon le filtre
+	 * @return
+	 */
+	public String affProd () {
+		
+		switch (type) {
+		case "mot":
+			//Appel de la méthode
+			listeProd = prService.getProdByKeyWord(rech);
+			ind = true;
+			break;
+		case "cat":
+			//Récupération de la catégorie à partir de la DB
+			cat = caService.getCatByNomService(rech);
+			//Appel de la méthode
+			listeProd = prService.getProdByCategorie(cat);
+			ind = true;
+			break;
+		default:
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vous n'avez pas sélectionné le type de recherche que vous voulez faire"));
+			ind=false;
+			break;
+		}	
+		return "affProd";
+	}
+	
+	public String affComm(Client cl) {
+		
+		List<Commande> coClient = coService.getCommandeByClient(cl);
+		
+		return "affComm";
 	}
 
 }

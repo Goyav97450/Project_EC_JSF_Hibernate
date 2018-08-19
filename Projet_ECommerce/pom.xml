@@ -10,7 +10,7 @@
 		<hibernate.version>4.2.21.Final</hibernate.version>
 		<spring.version>4.1.9.RELEASE</spring.version>
 	</properties>
-	
+
 	<!-- Primefaces theme repository -->
 	<repositories>
 		<repository>
@@ -164,7 +164,7 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.0.6</version>
 		</dependency>
-		
+
 		<!-- Lib javax.servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -172,7 +172,20 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- Lib javax.mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+
+		<!-- Lib PDF -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.0.6</version>
+		</dependency>
 	</dependencies>
 
 	<!-- forcer maven à compiler avec le compilateur de JAVA 8 -->
