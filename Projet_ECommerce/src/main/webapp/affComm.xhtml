@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="title">Afficher les produits</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form class="form-horizontal">
+					<p:outputLabel for="type" value="Mail : " />
+					<h:inputText value="#{clMB.cl.email}" />
+					<p:commandButton value="Rechercher" action="#{clMB.affProd}" ajax="false"/>
+				</h:form>
+
+				<h:form id="form" rendered="#{clMB.ind}" class="form-horizontal">
+					<p:dataTable var="co" value="#{clMB.coListe}" id="tableProd">
+						<p:column headerText="ID">
+							<h:outputText value="#{co.idCommande}" />
+						</p:column>
+						<p:column headerText="Date :">
+							<h:outputText value="#{co.dateCommande}" />
+						</p:column>
+						<p:column headerText="Catégorie:">
+							<h:outputText value="#{prod.ca.nomCategorie}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

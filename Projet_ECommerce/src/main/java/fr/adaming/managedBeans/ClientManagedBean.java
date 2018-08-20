@@ -85,6 +85,12 @@ public class ClientManagedBean {
 	private boolean idClSelector = true;
 
 	/**
+	 * Attribut idCLSelector qui permettra d'afficher les tables dynamiquement
+	 * dans la vue correspondante.
+	 */
+	private List<Commande> coListe;
+	
+	/**
 	 * Constructeur vide nécessaire à un ManagedBean
 	 */
 	public ClientManagedBean() {
@@ -327,6 +333,14 @@ public class ClientManagedBean {
 		this.listeIdClients = listeIdClients;
 	}
 
+	public List<Commande> getCoListe() {
+		return coListe;
+	}
+
+	public void setCoListe(List<Commande> coListe) {
+		this.coListe = coListe;
+	}
+
 	// méthode @PostConstruct
 	@PostConstruct
 	public void init() {
@@ -419,7 +433,7 @@ public class ClientManagedBean {
 	
 	public String affComm(Client cl) {
 		
-		List<Commande> coClient = coService.getCommandeByClient(cl);
+		coListe = coService.getCommandeByClient(cl);
 		
 		return "affComm";
 	}
