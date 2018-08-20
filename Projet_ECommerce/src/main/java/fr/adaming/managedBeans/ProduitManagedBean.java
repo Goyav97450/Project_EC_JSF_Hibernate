@@ -474,10 +474,10 @@ public class ProduitManagedBean implements Serializable {
 		Produit pOut = prService.getByIdProduitService(this.pr);
 
 		// Attribuer le nouveau prix au produit
-		pOut.setPrix(pOut.getPrix() * (this.promoIndice / 100));
-
-		// Appel de la méthode recherche par mot-clé
-		int verif = prService.attribuerOffre(this.pr);
+		pOut.setPrix(pOut.getPrix()*this.promoIndice/ 100);
+		
+		// Appel de la méthode attribuer offre
+		int verif = prService.attribuerOffre(pOut);
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
