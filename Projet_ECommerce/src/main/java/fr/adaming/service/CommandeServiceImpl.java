@@ -41,9 +41,9 @@ import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 
 /**
- * @author Thibault Classe implémentant l'interface IClientService
+ * @author Thibault Classe implÃ©mentant l'interface IClientService
  *         L'annotation @Service permet au conteneur SpringIoC d'identifier
- *         cette classe comme un bean L'annotation @Transactional sert à dire
+ *         cette classe comme un bean L'annotation @Transactional sert Ã  dire
  *         que cette classe n'est pas un singleton
  */
 @Service("coService")
@@ -52,8 +52,8 @@ public class CommandeServiceImpl implements ICommandeService {
 
 	/**
 	 * Transformation de l'association entre service et dao
-	 * L'annotation @Autowired permet de réaliser l'injection automatique des
-	 * dépendances.
+	 * L'annotation @Autowired permet de rÃ©aliser l'injection automatique des
+	 * dÃ©pendances.
 	 */
 	@Autowired
 	private ICommandeDao coDao;
@@ -98,8 +98,7 @@ public class CommandeServiceImpl implements ICommandeService {
 
 	@Override
 	public void sendMail(ByteArrayOutputStream output, Client cl, Commande co) {
-		final String username = "thibault.sch974@gmail.com";
-		final String password = "22oct1993";
+
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -115,20 +114,20 @@ public class CommandeServiceImpl implements ICommandeService {
 		});
 
 		try {
-			// Création d'un mimeBodypart contenant le text du mail
+			// CrÃ©ation d'un mimeBodypart contenant le text du mail
 			MimeBodyPart textBodyPart = new MimeBodyPart();
-			textBodyPart.setText("Mr/M " + cl.getNomClient() + "," + "\n\n Votre commande N° : " + co.getIdCommande()
-					+ " a bien été enregistrée, merci de votre confiance.");
+			textBodyPart.setText("Mr/M " + cl.getNomClient() + "," + "\n\n Votre commande NÂ° : " + co.getIdCommande()
+					+ " a bien Ã©tÃ© enregistrÃ©e, merci de votre confiance.");
 
 			byte[] bytes = output.toByteArray();
 
-			// Création d'un mimeBodypart contenant le PDF
+			// CrÃ©ation d'un mimeBodypart contenant le PDF
 			DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
 			MimeBodyPart pdfBodypart = new MimeBodyPart();
 			pdfBodypart.setDataHandler(new DataHandler(dataSource));
 			pdfBodypart.setFileName("recu" + co.getIdCommande() + ".pdf");
 
-			// Création d'un MimeMultiPart
+			// CrÃ©ation d'un MimeMultiPart
 			MimeMultipart mimeMultiPart = new MimeMultipart();
 			mimeMultiPart.addBodyPart(textBodyPart);
 			mimeMultiPart.addBodyPart(pdfBodypart);
@@ -143,7 +142,7 @@ public class CommandeServiceImpl implements ICommandeService {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(cl.getEmail()));
 
 			// Set Subject: header field
-			message.setSubject("Récapitulatif de la commande N° : " + co.getIdCommande());
+			message.setSubject("RÃ©capitulatif de la commande NÂ° : " + co.getIdCommande());
 			message.setContent(mimeMultiPart);
 
 			// Send message
@@ -166,34 +165,34 @@ public class CommandeServiceImpl implements ICommandeService {
 			total = total + lc.getPrix();
 		}
 
-		// Création du PDF
+		// CrÃ©ation du PDF
 		Document document = new Document();
 		try {
 			PdfWriter.getInstance(document, output);
 
 			document.open();
 
-			document.addTitle("Reçu de la commande : " + co.getIdCommande());
-			document.addSubject("Reçu de la commande : " + co.getIdCommande());
+			document.addTitle("ReÃ§u de la commande : " + co.getIdCommande());
+			document.addSubject("ReÃ§u de la commande : " + co.getIdCommande());
 			document.addAuthor("Marchambulant");
 
 			Paragraph pa1 = new Paragraph();
-			pa1.add(new Chunk("Mr/M " + cl.getNomClient() + "," + "\n\n Votre commande N° : " + co.getIdCommande()
-					+ " a bien été enregistrée, merci de votre confiance."));
-			//Création d'un tableau
+			pa1.add(new Chunk("Mr/M " + cl.getNomClient() + "," + "\n\n Votre commande NÂ° : " + co.getIdCommande()
+					+ " a bien Ã©tÃ© enregistrÃ©e, merci de votre confiance."));
+			//CrÃ©ation d'un tableau
 			PdfPTable table = new PdfPTable(3);
 			
-			//Création d'un objet cellule
+			//CrÃ©ation d'un objet cellule
 			PdfPCell cell;
 			
 			//Header
-			cell = new PdfPCell(new Phrase("Commande N° : " + co.getIdCommande()));
+			cell = new PdfPCell(new Phrase("Commande NÂ° : " + co.getIdCommande()));
 			cell.setBackgroundColor(GrayColor.GRAYBLACK);
 			cell.setColspan(3);
 			table.addCell(cell);
 			
 			table.addCell("Produit");
-			table.addCell("Quantité");
+			table.addCell("QuantitÃ©");
 			table.addCell("Prix");
 			//Contenus
 			for (LigneCommande lc:co.getListeLigne()) {
@@ -207,7 +206,7 @@ public class CommandeServiceImpl implements ICommandeService {
 			table.addCell(Double.toString(total));
 			
 			Paragraph pa2 = new Paragraph();
-			pa2.add(new Chunk("Le prix de votre commande est : " + total + " €."));
+			pa2.add(new Chunk("Le prix de votre commande est : " + total + " â‚¬."));
 			document.add(pa1);
 			document.add(pa2);
 
